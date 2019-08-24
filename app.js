@@ -1,24 +1,15 @@
-(function () {
-'use strict';
+(function() {
+  "use strict";
 
-angular.module('nameCalculatorApp', [])
+  angular
+    .module("DIApp", [])
 
-.controller('NameCalculatorController', function ($scope) {
-  $scope.name = "Kim";
-  $scope.numericValue = 0;
-  $scope.calculateNameValue = function () {
-    $scope.numericValue = calculateStringValue($scope.name);
-  }
-});
+    .controller("DIController", function($scope, $filter, $injector) {
+      $scope.name = "Kim";
 
-function calculateStringValue(string) {
-  var stringValue = 0;
-
-  for (var i = 0; i < string.length; i++) {
-    stringValue += string.charCodeAt(i);
-  }
-
-  return stringValue;
-}
-
+      $scope.upper = function() {
+        var upperCase = $filter("uppercase");
+        $scope.name = upperCase($scope.name);
+      };
+    });
 })();

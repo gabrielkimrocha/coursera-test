@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
-      <title>Name Calculator</title>
+    <title>Dependency Injection in JavaScript (and AngularJS)</title>
   </head>
-  <body ng-app="nameCalculatorApp">
-  <h1>Name Calculator</h1>
-    <div ng-controller="NameCalculatorController">
-      <div>
-        Your name: <input type="text" ng-model="name" ng-keyup="calculateNameValue();">
-      </div>
-      <div>
-        Total numeric value of person's name is: {{numericValue}}
-      </div>
+  <body ng-app="DIApp">
+    <h1>Dependency Injection in JavaScript (and AngularJS)</h1>
+    <div ng-controller="DIController">
+      Your name: <input type="text" ng-model="name" ng-blur="upper();" />
     </div>
   </body>
 </html>
