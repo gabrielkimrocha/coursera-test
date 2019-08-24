@@ -2,21 +2,47 @@
   "use strict";
 
   angular
-    .module("MsgApp", [])
+    .module("LunchCheckApp", [])
 
-    .controller("MsgController", MsgController);
+    .controller("LunchCheckController", LunchCheckController);
 
-  MsgController.$inject = ["$scope"];
+  LunchCheckController.$inject = ["$scope"];
 
-  function MsgController($scope) {
-    $scope.state = "OFF";
+  function LunchCheckController($scope) {
+    $scope.lunchString = "";
 
-    $scope.toggle = function() {
-      if ($scope.state == "OFF") {
-        $scope.state = "ON";
-      } else {
-        $scope.state = "OFF";
+    $scope.message = "";
+    $scope.textColorClass = "";
+    $scope.borderColorClass = "";
+
+    $scope.onCheckIfTooMuchClicked = function() {
+      var foodList = $scope.lunchString.split(",");
+
+      /** Checks for empty / whitespaces-filled strings between commas. */
+      var foodListFiltered = foodList.filter(function(element) {
+        if (!isEmptyOrSpaces(element)) return element;
+      });
+
+      if (foodListFiltered.length == 0) {
+        $scope.message = "Please enter data first";
+        $scope.textColorClass = "text-danger";
+
+        return;
       }
+
+      $scope.textColorClass = "text-success";
+
+      if (foodListFiltered.length <= 3) {
+        $scope.message = "Enjoy!";
+
+        return;
+      }
+
+      $scope.message = "Too much!";
     };
+
+    function isEmptyOrSpaces(str) {
+      return str === null || str.match(/^ *$/) !== null;
+    }
   }
 })();
