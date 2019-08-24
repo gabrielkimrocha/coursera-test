@@ -2,18 +2,21 @@
   "use strict";
 
   angular
-    .module("DIApp", [])
+    .module("MsgApp", [])
 
-    .controller("DIController", DIController);
+    .controller("MsgController", MsgController);
 
-  DIController.$inject = ["$scope", "$filter"];
+  MsgController.$inject = ["$scope"];
 
-  function DIController($scope, $filter) {
-    $scope.name = "Kim";
+  function MsgController($scope) {
+    $scope.state = "OFF";
 
-    $scope.upper = function() {
-      var upperCase = $filter("uppercase");
-      $scope.name = upperCase($scope.name);
+    $scope.toggle = function() {
+      if ($scope.state == "OFF") {
+        $scope.state = "ON";
+      } else {
+        $scope.state = "OFF";
+      }
     };
   }
 })();
