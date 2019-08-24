@@ -4,12 +4,16 @@
   angular
     .module("DIApp", [])
 
-    .controller("DIController", function($scope, $filter, $injector) {
-      $scope.name = "Kim";
+    .controller("DIController", DIController);
 
-      $scope.upper = function() {
-        var upperCase = $filter("uppercase");
-        $scope.name = upperCase($scope.name);
-      };
-    });
+  DIController.$inject = ["$scope", "$filter"];
+
+  function DIController($scope, $filter) {
+    $scope.name = "Kim";
+
+    $scope.upper = function() {
+      var upperCase = $filter("uppercase");
+      $scope.name = upperCase($scope.name);
+    };
+  }
 })();
