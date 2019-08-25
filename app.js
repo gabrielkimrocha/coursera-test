@@ -4,11 +4,13 @@
   angular
     .module("LunchCheckApp", [])
 
-    .controller("LunchCheckController", LunchCheckController);
+    .controller("LunchCheckController", LunchCheckController)
+    .filter("nullAndWhitespace", NullAndWhitespaceFilter)
+    .filter("extra", ExtraFilter);
 
-  LunchCheckController.$inject = ["$scope", "$filter"];
+  LunchCheckController.$inject = ["$scope", nullAndWhitespaceFilter];
 
-  function LunchCheckController($scope, $filter) {
+  function LunchCheckController($scope, nullAndWhitespaceFilter) {
     $scope.lunchString = "";
 
     $scope.message = "";
@@ -18,38 +20,60 @@
     $scope.lunchCost = "";
 
     $scope.onCheckIfTooMuchClicked = function() {
-      var foodList = $scope.lunchString.split(",");
+      var lunchStringFiltered = nullAndWhitespaceFilter($scope.lunchString);
 
-      /** Checks for empty / whitespaces-filled strings between commas. */
-      var foodListFiltered = foodList.filter(function(element) {
-        if (!isEmptyOrSpaces(element)) return element;
-      });
+      var foodList = lunchStringFiltered.split(",");
 
-      var foodLength = foodListFiltered.length;
+      var foodLength = foodList.length;
 
       $scope.lunchCost = 3.3 * foodLength;
 
       if (foodLength == 0) {
-        $scope.message = "Please enter data first";
         $scope.textColorClass = "text-danger";
+
+        $scope.message = "Please enter data first";
 
         return;
       }
 
       $scope.textColorClass = "text-success";
 
-      if (foodListFiltered.length <= 3) {
+      if (foodLength <= 3) {
         $scope.message = "Enjoy!";
-        $scope.message = $filter("uppercase")($scope.message);
 
         return;
       }
 
       $scope.message = "Too much!";
     };
+  }
 
-    function isEmptyOrSpaces(str) {
-      return str === null || str.match(/^ *$/) !== null;
-    }
+  function NullAndWhitespaceFilter() {
+    return function(input) {
+      /** Trim multiple colons between tokens. */
+      var output = input.replace(/(, *,+)/gm, ",");
+      /** Trim whitespaces from tokens. */
+      output = output.replace(/(, *)|( *,)/gm, ",");
+      /** Trim colons after last token. */
+      output = output.replace(/(,*$)/gm, "");
+
+      return output;
+    };
+  }
+
+  function ExtraFilter() {
+    return function(input, extraChar, extraCount) {
+      if (input == "") {
+        return;
+      }
+
+      var output = input;
+
+      for (var i = 0; i < extraCount; i++) {
+        output = extraChar + output + extraChar;
+      }
+
+      return output;
+    };
   }
 })();

@@ -31,7 +31,7 @@
         <button class="btn btn-default" ng-click="onCheckIfTooMuchClicked()">Check If Too Much</button>
       </div>
       <div class="form-group message {{ textColorClass }}">
-        {{ message }}
+        {{ message | extra: "*":3 | uppercase }}
         <br />
         Lunch cost: {{ lunchCost | currency: USD:3 }}
       </div>
