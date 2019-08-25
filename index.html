@@ -12,28 +12,26 @@
     </style>
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
-    <title>Lunch Checker</title>
+    <title>ng-repeat</title>
   </head>
-  <body ng-app="LunchCheckApp">
-    <div class="container" ng-controller="LunchCheckController">
-      <h1>Lunch Checker</h1>
+  <body ng-app="CounterApp">
+    <div class="container" ng-controller="CounterController">
+      <h1>The Digest Cycle</h1>
 
       <div class="form-group">
-        <input
-          id="lunch-menu"
-          type="text"
-          placeholder="list comma separated dishes you usually have for lunch"
-          class="form-control"
-          ng-model="lunchString"
-        />
+        <button class="btn btn-default" ng-click="showNumberOfWatchers()">Log # of Watchers</button>
       </div>
+
       <div class="form-group">
-        <button class="btn btn-default" ng-click="onCheckIfTooMuchClicked()">Check If Too Much</button>
+        <button class="btn btn-default" ng-click="countOnce()">Up Once Counter (once)</button>
       </div>
-      <div class="form-group message {{ textColorClass }}">
-        {{ message | extra: "*":3 | uppercase }}
-        <br />
-        Lunch cost: {{ lunchCost | currency: USD:3 }}
+
+      <div class="form-group">
+        <button class="btn btn-default" ng-click="upCounter()">Increment Counter</button>
+      </div>
+
+      <div class="form-group message">
+        Bla
       </div>
     </div>
   </body>
