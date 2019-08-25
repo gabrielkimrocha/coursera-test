@@ -6,14 +6,16 @@
 
     .controller("LunchCheckController", LunchCheckController);
 
-  LunchCheckController.$inject = ["$scope"];
+  LunchCheckController.$inject = ["$scope", "$filter"];
 
-  function LunchCheckController($scope) {
+  function LunchCheckController($scope, $filter) {
     $scope.lunchString = "";
 
     $scope.message = "";
     $scope.textColorClass = "";
     $scope.borderColorClass = "";
+
+    $scope.lunchCost = "";
 
     $scope.onCheckIfTooMuchClicked = function() {
       var foodList = $scope.lunchString.split(",");
@@ -23,7 +25,11 @@
         if (!isEmptyOrSpaces(element)) return element;
       });
 
-      if (foodListFiltered.length == 0) {
+      var foodLength = foodListFiltered.length;
+
+      $scope.lunchCost = 3.3 * foodLength;
+
+      if (foodLength == 0) {
         $scope.message = "Please enter data first";
         $scope.textColorClass = "text-danger";
 
@@ -34,6 +40,7 @@
 
       if (foodListFiltered.length <= 3) {
         $scope.message = "Enjoy!";
+        $scope.message = $filter("uppercase")($scope.message);
 
         return;
       }
