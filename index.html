@@ -1,28 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="ShoppingListApp">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/bootstrap.min.css" />
-    <style>
-      .message {
-        font-size: 1.3em;
-        font-weight: bold;
-      }
-    </style>
+    <meta charset="utf-8" />
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
+    <style>
+      body {
+        font-size: 1.2em;
+      }
+    </style>
     <title>ng-repeat</title>
   </head>
-  <body ng-app="CounterApp">
-    <div class="container" ng-controller="CounterController">
-      <h1>The Digest Cycle</h1>
+  <body>
+    <h1>ng-repeat</h1>
+    <div ng-controller="ShoppingListController">
+      <!-- Shopping List #1: -->
+      <h3>Shopping List:</h3>
+      <!-- <ul>
+        <li ng-repeat="item in shoppingList1">{{ item }}</li>
+      </ul> -->
 
-      <div class="form-group">
-        <button class="btn btn-default" ng-click="upCounter()">Increment Counter</button>
-      </div>
+      <!-- Shopping List #2: -->
+      <!-- <ul>
+        <li ng-repeat="item in shoppingList2">Buy {{ item.quantity }} of {{ item.name }}(s)</li>
+      </ul> -->
 
-      <div class="form-group message">Regular counter: {{ counter }}</div>
+      <!-- Shopping List #3: -->
+      <input type="text" ng-model="newItemName" placeholder="item name" />
+      <input type="text" ng-model="newItemQuantity" placeholder="item quantity" />
+      <button ng-click="addToList()">Add To List</button>
+
+      <ul>
+        <li ng-repeat="item in shoppingList2">{{ $index + 1 }}. Buy {{ item.quantity }} of {{ item.name }}(s)</li>
+      </ul>
+
+      <!-- <input type="text" ng-model="newItemName" placeholder="item name">
+      <input type="text" ng-model="newItemQuantity" placeholder="item quantity">
+      <button ng-click="addToList()">Add To List</button>
+      -->
     </div>
   </body>
 </html>

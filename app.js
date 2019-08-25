@@ -1,21 +1,47 @@
 (function() {
   "use strict";
 
-  angular
-    .module("CounterApp", [])
+  var shoppingList1 = [
+    "Milk",
+    "Donuts",
+    "Cookies",
+    "Chocolate",
+    "Peanut Butter",
+    "Pepto Bismol",
+    "Pepto Bismol (Chocolate flavor)",
+    "Pepto Bismol (Cookie flavor)"
+  ];
 
-    .controller("CounterController", CounterController);
+  var shoppingList2 = [
+    {
+      name: "Milk",
+      quantity: "2"
+    },
+    {
+      name: "Donuts",
+      quantity: "200"
+    },
+    {
+      name: "Cookies",
+      quantity: "300"
+    },
+    {
+      name: "Chocolate",
+      quantity: "5"
+    }
+  ];
 
-  CounterController.$inject = ["$scope", "$timeout"];
+  angular.module("ShoppingListApp", []).controller("ShoppingListController", ShoppingListController);
 
-  function CounterController($scope, $timeout) {
-    $scope.counter = 0;
+  ShoppingListController.$inject = ["$scope"];
+  function ShoppingListController($scope) {
+    $scope.shoppingList1 = shoppingList1;
+    $scope.shoppingList2 = shoppingList2;
 
-    $scope.upCounter = function() {
-      $timeout(function() {
-        $scope.counter++;
-        console.log("Counter incremented");
-      }, 2000);
+    $scope.addToList = function() {
+      var newItem = { name: $scope.newItemName, quantity: $scope.newItemQuantity };
+
+      $scope.shoppingList2.push(newItem);
     };
   }
 })();
