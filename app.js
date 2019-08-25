@@ -6,28 +6,16 @@
 
     .controller("CounterController", CounterController);
 
-  CounterController.$inject = ["$scope"];
+  CounterController.$inject = ["$scope", "$timeout"];
 
-  function CounterController($scope) {
-    $scope.onceCounter = 0;
+  function CounterController($scope, $timeout) {
     $scope.counter = 0;
 
-    $scope.inputText = "";
-
-    $scope.showNumberOfWatchers = function() {
-      console.log("# of Watchers: ", $scope.$$watchersCount);
-    };
-
-    $scope.countOnce = function() {
-      $scope.onceCounter = 1;
-    };
-
     $scope.upCounter = function() {
-      $scope.counter++;
+      $timeout(function() {
+        $scope.counter++;
+        console.log("Counter incremented");
+      }, 2000);
     };
-
-    $scope.$watch(function() {
-      console.log("Digest Loop Fired!");
-    });
   }
 })();

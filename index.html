@@ -19,25 +19,10 @@
       <h1>The Digest Cycle</h1>
 
       <div class="form-group">
-        <input type="text" placeholder="Input text..." class="form-control" ng-model="inputText" />
-      </div>
-
-      <div class="form-group">
-        <button class="btn btn-default" ng-click="showNumberOfWatchers()">Log # of Watchers</button>
-      </div>
-
-      <div class="form-group">
-        <button class="btn btn-default" ng-click="countOnce()">Up Once Counter (once)</button>
-      </div>
-
-      <div class="form-group">
         <button class="btn btn-default" ng-click="upCounter()">Increment Counter</button>
       </div>
 
-      <div class="form-group message">
-        Once counter: {{ onceCounter }} <br />
-        Regular counter: {{ counter }}
-      </div>
+      <div class="form-group message">Regular counter: {{ counter }}</div>
     </div>
   </body>
 </html>
